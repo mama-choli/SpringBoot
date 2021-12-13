@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UPDATE</title>
+</head>
+<body>
+<h1>РЕДАКТИРОВАТЬ ПОЛЬЗОВАТЕЛЯ</h1>
+<form th:method="PUT" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}" >
+    <input type="hidden" th:field="*{id}" id="id" value="*{id}">
+    <input type="text" th:field="${user.name}" id="name"/>
+    <label for="name">ИМЯ</label>
+    <br>
+    <input type="text" th:field="${user.lastName}" id="lastname"/>
+    <label for="lastname">ФАМИЛИЯ</label>
+    <br>
+    <input type="text" th:field="${user.email}" id="email"/>
+    <label for="email">ПОЧТА</label>
+    <br>
+    <input type="text" th:field="${user.username}" id="username"/>
+    <label for="username">ЛОГИН</label>
+    <br>
+    <input type="text" th:field="${user.password}" id="password"/>
+    <label for="password">ПАРОЛЬ</label>
+    <br/>
+    <select id="roles" th:field="*{roles}" size="3" multiple="multiple">
+        <option th:each="role : ${roles}"
+                th:value="${role.getId()}"
+                th:text="${role.roleName}"></option>
+    </select>
+    <label for="roles">ВЫБРАТЬ РОЛЬ(РОЛИ)</label>
+    <br>
+    <input type="submit" value="РЕДАКТИРОВАТЬ"/>
+</form>
+<br>
+<br>
+<br>
+<a th:href="@{/logout}"><input type="submit" value="ВЫХОД"/></a>
+</body>
+</html>

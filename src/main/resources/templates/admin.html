@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+</head>
+<body>
+<h2>ТАБЛИЦА</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>ИМЯ</th>
+        <th>ФАМИЛИЯ</th>
+        <th>ПОЧТА</th>
+        <th>ЛОГИН</th>
+        <th>ПАРОЛЬ</th>
+        <th>РОЛЬ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.id}"></td>
+        <td th:utext="${user.name}"></td>
+        <td th:utext="${user.lastName}"></td>
+        <td th:utext="${user.email}"></td>
+        <td th:utext="${user.username}"></td>
+        <td th:utext="${user.password}"></td>
+        <td th:text="${user.getUserRole()}"></td>
+        <td>
+            <form th:method="GET" th:action="@{/admin/{id}/update(id=${user.getId()})}">
+                <input type="submit" value="РЕДАКТИРОВАТЬ"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+                <input type="submit" value="УДАЛИТЬ"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<tr>
+    <th>
+        <form th:method="GET" th:action="@{/admin/new}">
+            <input type="submit" value="ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ"/>
+        </form>
+    </th>
+    <th>
+        <form th:method="GET" th:action="@{/user}">
+            <input type="submit" value="МОЯ СТРАНИЦА"/>
+        </form>
+    </th>
+</tr>
+<br>
+<br>
+<br>
+<a th:href="@{/logout}"><input type="submit" value="ВЫХОД"/></a>
+</body>
+</html>

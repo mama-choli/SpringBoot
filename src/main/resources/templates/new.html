@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NEW</title>
+</head>
+<body>
+
+<h1>ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ</h1>
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+    <input required type="text" th:field="${user.name}" id="name"/>
+    <label for="name">ИМЯ</label>
+    <br>
+    <input type="text" th:field="${user.lastName}" id="lastName"/>
+    <label for="lastName">ФАМИЛИЯ</label>
+    <br>
+    <input type="text" th:field="${user.email}" id="e-mail"/>
+    <label for="e-mail">ПОЧТА</label>
+    <br>
+    <input type="text" th:field="${user.username}" id="username"/>
+    <label for="username">ЛОГИН</label>
+    <br>
+    <input type="text" th:field="${user.password}" id="password"/>
+    <label for="password">ПАРОЛЬ</label>
+    <br>
+    <select id="roles" th:field="*{roles}" size="3" multiple="multiple">
+        <option th:each="role : ${roles}"
+                th:value="${role.getId()}"
+                th:text="${role.roleName}"></option>
+    </select>
+    <label for="roles">ВЫБРАТЬ РОЛЬ(РОЛИ)</label>
+    <br>
+    <input type="submit" value="ДОБАВИТЬ"/>
+</form>
+<br>
+<br>
+<br>
+<a th:href="@{/logout}"><input type="submit" value="ВЫХОД"/></a>
+</body>
+</html>
